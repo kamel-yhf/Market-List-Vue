@@ -6,12 +6,9 @@
       </v-card-title>
       <v-card-text>
         <v-form>
-          <v-text-field 
-            label="Username" 
-            prepend-icon="mdi-account-circle"
-          />
-          <v-text-field 
-            :type="showPassword ? 'text' : 'password'" 
+          <v-text-field label="Username" prepend-icon="mdi-account-circle" />
+          <v-text-field
+            :type="showPassword ? 'text' : 'password'"
             label="Password"
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -31,11 +28,11 @@
 
 <script>
 export default {
-  name: 'Login',
-  data () {
+  name: "Login",
+  data() {
     return {
       showPassword: false
-    }
+    };
   }
-}
+};
 </script>

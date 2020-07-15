@@ -17,11 +17,11 @@
             <div v-show="show">
               <v-divider></v-divider>
 
- <v-list v-for="product in list.product" :key="product">
-            {{product.productName}}:
-            <v-text v-for="price in product.productPrice" :key="price">{{price.price}}€</v-text>
-          </v-list>
-              </div>
+              <v-list v-for="product in list.product" :key="product">
+                {{product.productName}}:
+                <v-text v-for="price in product.productPrice" :key="price">{{price.price}}€</v-text>
+              </v-list>
+            </div>
           </v-expand-transition>
         </v-card>
       </v-col>
