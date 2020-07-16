@@ -2,12 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Lists from '../components/ListComponent'
 import Login from '../components/Login'
+import NewList from '../components/CreateList'
+import TestList from '../components/TestList'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/',
+    path: '/lists',
     name: 'Lists',
     component: Lists
   },
@@ -15,6 +17,16 @@ Vue.use(VueRouter)
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/new-list',
+    name: 'newList',
+    component: NewList
+  },
+  {
+    path: '/test', 
+    name: 'Test',
+    component: TestList
   }
 ]
 
