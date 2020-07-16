@@ -4,6 +4,7 @@ import Lists from '../components/ListComponent'
 import Login from '../components/Login'
 import NewList from '../components/CreateList'
 import TestList from '../components/TestList'
+import Products from '../components/ProductComponent'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ Vue.use(VueRouter)
     path: '/test', 
     name: 'Test',
     component: TestList
+  },
+  {
+    path: '/product', 
+    name: 'Product',
+    component: Products
   }
 ]
 
