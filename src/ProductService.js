@@ -14,13 +14,18 @@ class ProductService {
         resolve(
           data.map((product) => ({
             ...product,
-            createdAt: new Date(product.createdAt),
           }))
         );
       } catch (err) {
         reject(err);
       }
     });
+  }
+
+  //Create list
+  static createProduct(product) {
+    return axios.post(url, 
+      product);
   }
 }
 

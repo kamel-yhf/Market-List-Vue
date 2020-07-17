@@ -1,72 +1,32 @@
 <template>
   <v-container>
-      <button type="text" v-on:click="div"> + </button>
-    <div v-for="list in ListTest" :key="list.id">
-      <h1>{{list.listName}}</h1>
-      <div v-for="product in list.product" :key="product.id" class="add-product">
-        <input v-model="product.productName" />
-        <div v-for="price in product.price" :key="price.id">
-          <input v-model="price.price" />
-        </div>
-      </div>
+    <input v-model="listName" placeholder="new list" />
+    <p>list is: {{ listName }}</p>
+    <div v-for="product in products" :key="product._id">
+      <input type="checkbox" :value="product" v-model="lists" />
+      <label for="product">{{product.productName}}</label>
+      <br />
     </div>
-    
+    <span>Noms cochés : {{ lists }}</span>
   </v-container>
 </template>
 
 <script>
+import ProductService from "../ProductService";
 export default {
   data() {
     return {
-      ListTest: [
-        {
-          listName: "List n°1",
-          product: [
-            {
-              productName: "Eau",
-              price: [
-                {
-                  price: 10.99
-                }
-              ]
-            },
-            {
-              productName: "Chips",
-              price: [
-                {
-                  price: 20.99
-                }
-              ]
-            }
-          ]
-        },
-        {
-          listName: "List n°2",
-          product: [
-            {
-              productName: "Bière",
-              price: [
-                {
-                  price: 10.99
-                }
-              ]
-            },
-            {
-              productName: "Fraise",
-              price: [
-                {
-                  price: 20.99
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      div: '<div v-for="list in ListTest" :key="list.id"><h1>{{list.listName}}</h1><button @click="addProduct">Add</button><div v-for="product in list.product" :key="product.id" class="add-product"><input v-model="product.productName" /><div v-for="price in product.price" :key="price.id"><input v-model="price.price" /></div></div></div>'
+      lists: [],
+      products: [],
+      listName: ""
     };
   },
-  methods: {
-    addProduct() {
+  async created() {
+    try {
+      console.log(this.products);
+      this.products = await ProductService.getProducts();
+    } catch (err) {
+      console.error(err);
     }
   }
 };

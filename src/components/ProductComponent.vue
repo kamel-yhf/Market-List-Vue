@@ -1,12 +1,23 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col v-for="product in products" :key="product._id" cols="12">
-        <v-card>
-          <v-card-title>{{product.productName}}</v-card-title>
-        </v-card>
-      </v-col>
-    </v-row>
+    <table>
+      <tr>
+        <th>Products</th>
+        <th>Price</th>
+      </tr>
+      <tr v-for="product in products" :key="product._id">
+        <td>{{product.productName}}</td>
+        <td>{{product.productPrice}}</td>
+      </tr>
+    </table>
+
+    <!--create product-->
+    <div class="create">
+      <label for="create-product">new products</label>
+      <input type="text" v-model="newProduct.name" placeholder="Name">
+      <input type="text" v-model="newProduct.price" placeholder="Price">
+      <button v-on:click="createProduct">ADD</button>
+    </div>
   </v-container>
 </template>
 
@@ -18,15 +29,24 @@ export default {
   data() {
     return {
       products: [],
-      show: false
+      show: false,
+      newProduct: {
+        name: '',
+        price: 0
+      }
     };
   },
   async created() {
     try {
-      console.log(this.products);
       this.products = await ProductService.getProducts();
     } catch (err) {
       console.error(err);
+    }
+  },
+  methods:{
+    createProduct(){
+      ProductService.createProduct(this.newProduct);
+      this.products = ProductService.getProducts();
     }
   }
 };
