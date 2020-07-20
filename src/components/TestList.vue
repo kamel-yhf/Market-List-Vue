@@ -1,24 +1,32 @@
 <template>
   <v-container>
-    <input v-model="listName" placeholder="new list" />
-    <p>list is: {{ listName }}</p>
+    <input v-model="List.ListName" placeholder="Name" />
+    <v-btn color="success" v-on:click="createList()">ADD List</v-btn>
     <div v-for="product in products" :key="product._id">
-      <input type="checkbox" :value="product" v-model="lists" />
+      <input type="radio" :value="product.productName" v-model="List.product[0].productName" />
       <label for="product">{{product.productName}}</label>
       <br />
     </div>
-    <span>Noms cochés : {{ lists }}</span>
+    <span>Produits cochés : {{ List.product }}</span>
   </v-container>
 </template>
 
 <script>
 import ProductService from "../ProductService";
+import ListService from "../ListService";
+
 export default {
   data() {
     return {
-      lists: [],
       products: [],
-      listName: ""
+      List: {
+        ListName: "",
+        product: [
+          {
+            productName: ""
+          }
+        ]
+      }
     };
   },
   async created() {
@@ -27,6 +35,12 @@ export default {
       this.products = await ProductService.getProducts();
     } catch (err) {
       console.error(err);
+    }
+  },
+  methods: {
+    createList() {
+      console.log(this.List);
+      ListService.createList(this.List);
     }
   }
 };

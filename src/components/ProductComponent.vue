@@ -1,5 +1,13 @@
 <template>
   <v-container>
+<!--create product-->
+    <div>
+      <label for="create-product">new products</label> <br>
+      <input type="text" v-model="newProduct.productName" placeholder="productName">
+      <input type="text" v-model="newProduct.productPrice">
+      <v-btn v-on:click="createProduct" color="success">ADD</v-btn>
+    </div>
+<br><br>
     <table>
       <tr>
         <th>Products</th>
@@ -8,16 +16,9 @@
       <tr v-for="product in products" :key="product._id">
         <td>{{product.productName}}</td>
         <td>{{product.productPrice}}</td>
+        <td><v-btn @click="deleteProduct(product._id)" color="red" text>delete</v-btn></td>
       </tr>
     </table>
-
-    <!--create product-->
-    <div class="create">
-      <label for="create-product">new products</label>
-      <input type="text" v-model="newProduct.name" placeholder="Name">
-      <input type="text" v-model="newProduct.price" placeholder="Price">
-      <button v-on:click="createProduct">ADD</button>
-    </div>
   </v-container>
 </template>
 
@@ -31,8 +32,8 @@ export default {
       products: [],
       show: false,
       newProduct: {
-        name: '',
-        price: 0
+        productName: '',
+        productPrice: 0
       }
     };
   },
@@ -46,6 +47,10 @@ export default {
   methods:{
     createProduct(){
       ProductService.createProduct(this.newProduct);
+      this.products = ProductService.getProducts();
+    },
+    deleteProduct(id) {
+      ProductService.deleteProduct(id);
       this.products = ProductService.getProducts();
     }
   }

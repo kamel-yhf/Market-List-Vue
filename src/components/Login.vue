@@ -3,10 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-row
-            :align="alignment"
-            :justify="justify"
-          >
+          <v-row>
             <v-card width="500" class="mx-auto mt-5">
               <v-card-title class="pb-0">
                 <h1>Login</h1>

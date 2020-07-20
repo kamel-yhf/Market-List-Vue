@@ -5,7 +5,7 @@ const url = "http://localhost:5000/products/";
 /* eslint-disable no-async-promise-executor */
 
 class ProductService {
-  // get lists
+  // get product
   static getProducts() {
     return new Promise(async (resolve, reject) => {
       try {
@@ -22,10 +22,21 @@ class ProductService {
     });
   }
 
-  //Create list
+  //Create product
   static createProduct(product) {
-    return axios.post(url, 
-      product);
+    return axios
+      .post(url, product)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  //delete product
+  static deleteProduct(id) {
+    return axios.delete(`${url}${id}`);
   }
 }
 

@@ -22,11 +22,17 @@ class ListService {
       }
     });
   }
+
   //Create list
-  static insertlist(list) {
-    return axios.post(url, {
-      list,
-    });
+  static createList(list) {
+    return axios
+      .post(url, { list })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   //delete list

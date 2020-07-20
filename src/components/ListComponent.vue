@@ -1,12 +1,5 @@
 <template>
   <v-container>
-     <p>The List has {{ this.lists.length }} items.</p>
-    <input
-    v-model="newList.listName" 
-    >
-    <pre>{{ JSON.stringify(this.ListTest, null, 2) }}</pre>
-   <br>
-   <br>
     <v-row>
       <v-col v-for="list in lists" :key="list._id" cols="12">
         <v-card>
@@ -26,8 +19,7 @@
               <v-divider></v-divider>
 
               <v-list v-for="product in list.product" :key="product._id">
-                {{product.productName}}:
-                <p v-for="price in product.productPrice" :key="price._id">{{price.price}}€</p>
+                {{product.productName}}
               </v-list>
             </div>
           </v-expand-transition>
@@ -45,14 +37,6 @@ export default {
   data() {
     return {
       lists: [],
-      newList:{
-        listName: String,
-        product:{
-          productName: String,
-          price:{}
-        }
-      },
-      
       show: false
     };
   },
@@ -68,9 +52,6 @@ export default {
     async deleteList(id) {
       await ListService.deletelist(id);
       this.lists = await ListService.getLists();
-    },
-    listPush() {
-      this.lists.push({...this.newList});
     }
   }
 };
