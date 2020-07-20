@@ -26,7 +26,7 @@ class ListService {
   //Create list
   static createList(list) {
     return axios
-      .post(url, { list })
+      .post(url, list)
       .then((response) => {
         console.log(response);
       })
