@@ -38,6 +38,18 @@ class ProductService {
   static deleteProduct(id) {
     return axios.delete(`${url}${id}`);
   }
+
+  //update product
+  static updateProduct(id, product) {
+    return axios
+      .put(`${url}${id}`, {product})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
 export default ProductService;
