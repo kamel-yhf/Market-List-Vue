@@ -34,11 +34,6 @@
             <router-link to="/login">Login</router-link>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
-          <v-list-item-content>
-            <router-link to="/test">TEST</router-link>
-          </v-list-item-content>
-        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
