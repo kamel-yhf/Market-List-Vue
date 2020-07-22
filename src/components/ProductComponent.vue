@@ -5,7 +5,7 @@
       <label for="create-product">new products</label>
       <br />
       <input type="text" v-model="newProduct.productName" placeholder="productName" />
-      <input type="text" v-model="newProduct.productPrice" />
+      <input type="number" v-model="newProduct.productPrice" />
       <a href="/product">
         <v-btn v-on:click="createProduct" color="success">ADD</v-btn>
       </a>
@@ -31,15 +31,15 @@
       </tr>
     </table>
     <br />
-    <container v-if="display" v-model="productToUpdate">
+    <div v-if="display" :value="productToUpdate">
       <label for="create-product">update products</label>
       <br />
       <input type="text" v-model="productToUpdate.productName" placeholder="productName" />
-      <input type="text" v-model="productToUpdate.productPrice" />
-      <a href="#">
-        <v-btn @click="updateProduct(productToUpdate._id)" color="success">ADD</v-btn>
+      <input type="number" v-model="productToUpdate.productPrice" />
+      <a href="/product">
+        <v-btn @click="updateProduct(productToUpdate._id)" color="red">Modifer</v-btn>
       </a>
-    </container>
+    </div>
   </v-container>
 </template>
 

@@ -42,7 +42,7 @@ class ProductService {
   //update product
   static updateProduct(id, product) {
     return axios
-      .put(`${url}${id}`, {product})
+      .put(`${url}${id}`, product)
       .then((response) => {
         console.log(response);
       })
