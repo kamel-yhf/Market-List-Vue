@@ -7,7 +7,7 @@
       <input type="text" v-model="newProduct.productName" placeholder="productName" />
       <input type="number" v-model="newProduct.productPrice" />
       <a href="/product">
-        <v-btn v-on:click="createProduct" color="success">ADD</v-btn>
+        <v-btn v-on:click="createProduct" @click="msg('Produit Ajouté')" color="success">ADD</v-btn>
       </a>
     </div>
     <br />
@@ -22,7 +22,7 @@
         <td>{{product.productPrice}}</td>
         <td>
           <a href="/product">
-            <v-btn @click="deleteProduct(product._id)" color="red" text>delete</v-btn>
+            <v-btn @click="deleteProduct(product._id)" v-on:click="msg('Produit Supprimé')" color="red" text>delete</v-btn>
           </a>
         </td>
         <td>
@@ -37,7 +37,7 @@
       <input type="text" v-model="productToUpdate.productName" placeholder="productName" />
       <input type="number" v-model="productToUpdate.productPrice" />
       <a href="/product">
-        <v-btn @click="updateProduct(productToUpdate._id)" color="red">Modifer</v-btn>
+        <v-btn @click="updateProduct(productToUpdate._id)" v-on:click="msg('Produit Modifié')" color="red">Modifer</v-btn>
       </a>
     </div>
   </v-container>
@@ -82,6 +82,9 @@ export default {
     updateProduct(id) {
       ProductService.updateProduct(id, this.productToUpdate);
       this.products = ProductService.getProducts();
+    },
+    msg: function(message){
+      alert(message);
     }
   }
 };

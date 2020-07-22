@@ -13,7 +13,7 @@
       </div>
     </div>
     <br />
-    <v-btn v-if="display" color="success" v-on:click="createList()">Enregister</v-btn>
+    <v-btn v-if="display" color="success" v-on:click="createList()" @click="msg">Enregister</v-btn>
 
     <!-- <span>Produits cochés : {{ List }}</span> -->
   </v-container>
@@ -51,6 +51,9 @@ export default {
     createList() {
       console.log(this.List);
       ListService.createList(this.List);
+    },
+    msg: function(){
+      alert('Liste Créée');
     }
   }
 };

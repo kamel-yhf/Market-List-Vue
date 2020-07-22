@@ -7,7 +7,7 @@
           <v-card-actions>
             <v-btn color="primary" text>Share</v-btn>
             <v-btn color="orange" text>update</v-btn>
-            <v-btn @click="deleteList(list._id)" color="red" text>delete</v-btn>
+            <v-btn @click="deleteList(list._id)" v-on:click="msg" color="red" text>delete</v-btn>
             <v-spacer></v-spacer>
 
             <v-btn icon @click="show = !show">
@@ -52,6 +52,9 @@ export default {
     async deleteList(id) {
       await ListService.deletelist(id);
       this.lists = await ListService.getLists();
+    },
+    msg: function(){
+      alert(' Liste Supprimée');
     }
   }
 };
