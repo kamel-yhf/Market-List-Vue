@@ -5,6 +5,7 @@ import Login from "../components/Login";
 import NewList from "../components/CreateList";
 import Products from "../components/ProductComponent";
 import UpdateList from "../components/UpdateList";
+import Register from "../components/Register";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
     name: "updateList",
     component: UpdateList,
   },
+  {
+    path: "/register",
+    name: "register",
+    component: Register,
+  }
 ];
 
 const router = new VueRouter({
