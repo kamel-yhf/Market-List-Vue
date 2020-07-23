@@ -13,8 +13,7 @@ class ListService {
         const data = res.data;
         resolve(
           data.map((list) => ({
-            ...list,
-            createdAt: new Date(list.createdAt),
+            ...list
           }))
         );
       } catch (err) {
@@ -38,6 +37,26 @@ class ListService {
   //delete list
   static deletelist(id) {
     return axios.delete(`${url}${id}`);
+  }
+
+  //update list
+  static updateList(id, list) {
+    return axios
+      .put(`${url}${id}`, list)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  static getOneList(id) {
+    return axios.get(`${url}${id}`).then(response => {
+      console.log(response);
+    }).catch(err => {
+      console.log(err);
+    })
   }
 }
 

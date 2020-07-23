@@ -24,6 +24,7 @@ import ProductService from "../ProductService";
 import ListService from "../ListService";
 
 export default {
+  name: 'CreateList',
   data() {
     return {
       products: [],
