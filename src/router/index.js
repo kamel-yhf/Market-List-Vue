@@ -6,6 +6,7 @@ import NewList from "../components/CreateList";
 import Products from "../components/ProductComponent";
 import UpdateList from "../components/UpdateList";
 import Register from "../components/Register";
+import User from "../components/User";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/register",
     name: "register",
     component: Register,
+  },
+  {
+    path: "/users",
+    name: "user",
+    component: User,
   }
 ];
 
