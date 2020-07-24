@@ -3,37 +3,23 @@
     <h1>Modifier liste</h1>
     <label>Entrez un nom:</label>
     <br />
-    <input type="text" id="name" v-model="list.ListName" />
+    <h2 id="name">{{list.ListName}}</h2>
     <br />
     <label for="product">Product:</label>
     <br />
-    <ul>
+    <ul v-for="product in list.product" :key="product._id">
       <li>
-         <input type="text" id="product" v-model="list.product" />
+        <input type="text" v-model="product.productName" />
       </li>
     </ul>
-
-    <button type="submit" @click="updateList">Save</button>
-    <p>{{message}}</p>
-
-    <!-- <a>Ajoutez des produits</a>
-    <div v-for="product in products" :key="product._id">
-      <div>
-        <input
-          type="checkbox"
-          :value="{ productName: list.product.productName }"
-          v-model="list.product"
-        />
-        <label for="product"> {{ product.productName }}</label>
-        <br />
-      </div>
-    </div>
+    <button @click="addItem">ADD</button>
     <br />
-    <v-btn color="success" v-on:click="createList()">Enregister</v-btn>-->
+    <button type="submit" @click="updateList">Save</button>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
 import ListService from "../ListService";
 
 export default {
@@ -45,36 +31,49 @@ export default {
         product: [],
       },
       id: this.$route.params.id,
-      message: ""
     };
   },
   created() {
-    this.getOne(this.$route.params.id);
+    this.getOne(this.id);
+  },
+  mounted() {
+    /*ProductService.getProducts().then(product => {
+      this.list.product = product;
+    });*/
   },
   methods: {
-    getOne(){
-      this.list = ListService.getOneList(this.id)
+    getOne() {
+      axios
+        .get(`http://localhost:5000/lists/${this.id}`)
+        .then((result) => {
+          this.list = result.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    updateList(){
+    updateList() {
       let data = {
         list: {
-        ListName: this.list.ListName,
-        product: this.list.product
-      }
+          ListName: this.list.ListName,
+          product: [...this.list.product],
+        },
       };
-      console.log(this.data);
+      console.log(this.list);
       console.log(data);
-      ListService.updateList(this.id, data)
-        .then(response => {
+      ListService.updateList(this.id, this.list)
+        .then((response) => {
           console.log(response.data);
-          this.message = "The list updated";
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e);
         });
-
+    },
+    addItem() {
+      this.list.product.push({
+        productName: ''
+      });
     }
-    
   },
 };
 </script>

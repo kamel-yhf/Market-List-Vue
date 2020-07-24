@@ -18,16 +18,14 @@
         <td>{{user.phone}}</td>
         <td>{{user.address}}</td>
         <td>{{user.password}}</td>
-        <!-- <td>
-        <a href="/product">
+        <td>
           <v-btn
-            @click="deleteProduct(product._id)"
-            v-on:click="msg('Produit Supprimé')"
+            @click="deleteUser(user._id)"
+            v-on:click="msg('User Supprimé')"
             color="red"
             text
           >delete</v-btn>
-        </a>
-        </td>-->
+        </td>
       </tr>
     </tbody>
   </v-simple-table>
@@ -49,6 +47,12 @@ export default {
       console.error(err);
     }
   },
+  methods:{
+    deleteUser(id){
+      UserService.deleteUser(id);
+      this.users = UserService.getUsers();
+    }
+  }
 };
 </script>
 

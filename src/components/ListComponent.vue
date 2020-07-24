@@ -1,8 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="list in lists" :key="list._id" cols="12">
-        <v-card>
+      <v-col v-for="list in lists" :key="list._id">
+        <v-card class="mx-auto"
+    max-width="344">
           <v-card-title>{{list.ListName}}</v-card-title>
           <v-card-actions>
             <v-btn color="primary" text>Share</v-btn>
@@ -37,7 +38,8 @@ export default {
   data() {
     return {
       lists: [],
-      show: false
+      show: false,
+      notShow: true
     };
   },
   async created() {
