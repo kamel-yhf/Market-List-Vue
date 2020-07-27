@@ -26,6 +26,9 @@
             text
           >delete</v-btn>
         </td>
+        <td>
+           <router-link :to="'/user/' + user._id"><v-btn color="orange" text>Update</v-btn></router-link>
+        </td>
       </tr>
     </tbody>
   </v-simple-table>
@@ -37,7 +40,7 @@ import UserService from "../UserService";
 export default {
   data() {
     return {
-      users: [],
+      users: []
     };
   },
   async created() {
@@ -47,12 +50,12 @@ export default {
       console.error(err);
     }
   },
-  methods:{
-    deleteUser(id){
+  methods: {
+    deleteUser(id) {
       UserService.deleteUser(id);
       this.users = UserService.getUsers();
     }
-  }
+  },
 };
 </script>
 

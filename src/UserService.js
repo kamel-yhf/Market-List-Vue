@@ -50,6 +50,14 @@ class UserService {
         console.log(error);
       });
   }
+
+  static getOneUser(id) {
+    return axios.get(`${url}${id}`).then(response => {
+      console.log(response);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 }
 
 export default UserService;

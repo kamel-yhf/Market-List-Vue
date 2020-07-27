@@ -7,6 +7,7 @@ import Products from "../components/ProductComponent";
 import UpdateList from "../components/UpdateList";
 import Register from "../components/Register";
 import User from "../components/User";
+import UpdatUser from "../components/UpdatUser"
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ const routes = [
     path: "/users",
     name: "user",
     component: User,
+  },
+  {
+    path: "/user/:id",
+    name: "updatUser",
+    component: UpdatUser,
   }
 ];
 
