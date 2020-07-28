@@ -7,11 +7,23 @@ import Products from "../components/ProductComponent";
 import UpdateList from "../components/UpdateList";
 import Register from "../components/Register";
 import User from "../components/User";
-import UpdatUser from "../components/UpdatUser"
+import UpdatUser from "../components/UpdatUser";
+import Market from "../components/Market";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/",
+    redirect: {
+      name: "login",
+    },
+  },
+  {
+    path: "/market",
+    name: "market",
+    component: Market,
+  },
   {
     path: "/lists",
     name: "Lists",
@@ -51,7 +63,7 @@ const routes = [
     path: "/user/:id",
     name: "updatUser",
     component: UpdatUser,
-  }
+  },
 ];
 
 const router = new VueRouter({
