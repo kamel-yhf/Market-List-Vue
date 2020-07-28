@@ -52,12 +52,26 @@ class UserService {
   }
 
   static getOneUser(id) {
-    return axios.get(`${url}${id}`).then(response => {
-      console.log(response);
-    }).catch(err => {
-      console.log(err);
-    })
+    return axios
+      .get(`${url}${id}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
+
+  //login user
+  static loginUser(User) {
+    //console.log(User);
+    return axios.post(url + 'login/', User).then((res) => res.data);
+  }
+  static logout() {
+    // remove user from local storage
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+}
 }
 
 export default UserService;
