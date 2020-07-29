@@ -28,6 +28,14 @@
         </v-list-item>
         <v-list-item link>
           <v-list-item-action>
+            <v-icon>mdi-store</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <router-link to="/market">Market</router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-action>
             <v-icon>mdi-login</v-icon>
           </v-list-item-action>
           <v-list-item-content>
@@ -45,8 +53,6 @@
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Market List</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-title>hello</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -73,6 +79,9 @@ export default {
     },
     logout() {
       this.authenticated = false;
+      localStorage.removeItem('email');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('id');
     },
   },
 };
