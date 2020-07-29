@@ -18,7 +18,10 @@
                   :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="showPassword = !showPassword"
                 />
-                 <div v-show="submitted && !password" class="invalid-feedback">Password or Email is required</div>
+                <div
+                  v-show="submitted && !password"
+                  class="invalid-feedback"
+                >Password or Email is required</div>
               </v-form>
             </v-card-text>
             <v-divider></v-divider>
@@ -47,38 +50,31 @@ export default {
       email: "",
       password: "",
       msg: "",
-      submitted: false
+      submitted: false,
     };
-  },
-  created() {
-    // reset login status
-    UserService.logout();
   },
   methods: {
     auth() {
-      this.submitted = true;
       if (this.email != "" && this.password != "") {
-        try {
-          const User = {
-            email: this.email,
-            password: this.password,
-          };
-          const response = UserService.loginUser(User)
-            .then((res) => {
-              sessionStorage.email = res.user.email;
-              sessionStorage.password = res.user.password;
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          this.msg = response.msg;
-        } catch (error) {
-          this.msg = error;
-        }
-        this.$emit("authenticated", true);
-        this.$router.replace({ name: "Lists" });
-      } else {
-        console.log("A username and password required");
+        const User = {
+          email: this.email,
+          password: this.password,
+        };
+        UserService.loginUser(User)
+          .then((res) => {
+            localStorage.email = res.user.email;
+            localStorage.userName = res.user.userName;
+            localStorage.id = res.user._id;
+            this.msg = "Vous êtes connectez avec succès";
+            setTimeout(() => {
+              this.$router.replace({ name: "Lists" });
+              this.$emit("authenticated", true);
+            }, 3000);
+          })
+          .catch(() => {
+            this.msg = "Une erreur est survenus";
+            console.log(this.msg);
+          });
       }
     },
   },

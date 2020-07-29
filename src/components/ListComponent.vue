@@ -32,6 +32,7 @@
 
 <script>
 import ListService from "../ListService";
+import UserService from "../UserService";
 
 export default {
   name: "ListComponent",
@@ -44,8 +45,11 @@ export default {
   },
   async created() {
     try {
-      console.log(this.lists);
-      this.lists = await ListService.getLists();
+      //console.log(this.lists);
+      //this.lists = await ListService.getLists();
+      UserService.getOneUser(localStorage.getItem('id')).then((user) => {
+        this.lists = user.data.lists;   
+      });
     } catch (err) {
       console.error(err);
     }
