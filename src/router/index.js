@@ -64,7 +64,9 @@ const routes = [
     name: "updatUser",
     component: UpdatUser,
   },
+  { path: '*', redirect: '/' }
 ];
+
 
 const router = new VueRouter({
   mode: "history",
