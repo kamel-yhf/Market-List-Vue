@@ -13,7 +13,7 @@
       </div>
     </div>
     <br />
-    <v-btn v-if="display" color="success" v-on:click="createList()" @click="msg">Enregister</v-btn>
+    <v-btn v-if="display" color="success" v-on:click="createList()">Enregister</v-btn>
 
     <!-- <span>Produits cochés : {{ List }}</span> -->
   </v-container>
@@ -21,7 +21,7 @@
 
 <script>
 import ProductService from "../ProductService";
-import ListService from "../ListService";
+import UserService from '../UserService';
 
 export default {
   name: 'CreateList',
@@ -50,8 +50,10 @@ export default {
   },
   methods: {
     createList() {
-      console.log(this.List);
-      ListService.createList(this.List);
+      //console.log(this.List);
+      UserService.addListToUser(localStorage.getItem('id'), this.List).then(res => {
+        console.log(res.data.message);
+      })
     },
     msg: function(){
       alert('Liste Créée');

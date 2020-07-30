@@ -60,6 +60,10 @@ class UserService {
     //console.log(User);
     return axios.post(url + 'login/', User).then((res) => res.data);
   }
+
+  static addListToUser(id, data) {
+    return axios.put(url + 'lists_update/' + id, data);
+  }
 }
 
 export default UserService;
