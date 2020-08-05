@@ -35,8 +35,8 @@ class ListService {
   }
 
   //delete list
-  static deletelist(id) {
-    return axios.delete(`${url}${id}`);
+  static deleteList(id, data) {
+    return axios.delete(`${url}${id}`, data);
   }
 
   //update list

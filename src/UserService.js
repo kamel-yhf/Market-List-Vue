@@ -64,6 +64,10 @@ class UserService {
   static addListToUser(id, data) {
     return axios.put(url + 'lists_update/' + id, data);
   }
+
+  static deleteListInUser(id, data){
+    return axios.put(url + 'list_delete/' + id, data);
+  }
 }
 
 export default UserService;

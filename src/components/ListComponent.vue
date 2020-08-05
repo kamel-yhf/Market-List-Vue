@@ -2,12 +2,13 @@
   <v-container>
     <v-row>
       <v-col v-for="list in lists" :key="list._id">
-        <v-card class="mx-auto"
-    max-width="344">
+        <v-card class="mx-auto" max-width="344">
           <v-card-title>{{list.ListName}}</v-card-title>
           <v-card-actions>
             <v-btn color="primary" text>Share</v-btn>
-            <router-link :to="'/update-list/' + list._id"><v-btn color="orange" text>Update</v-btn></router-link>
+            <router-link :to="'/update-list/' + list._id">
+              <v-btn color="orange" text>Update</v-btn>
+            </router-link>
             <v-btn @click="deleteList(list._id)" color="red" text>delete</v-btn>
             <v-spacer></v-spacer>
 
@@ -19,9 +20,7 @@
             <div v-show="show">
               <v-divider></v-divider>
 
-              <v-list v-for="product in list.product" :key="product._id">
-                {{product.productName}}
-              </v-list>
+              <v-list v-for="product in list.product" :key="product._id">{{product.productName}}</v-list>
             </div>
           </v-expand-transition>
         </v-card>
@@ -31,35 +30,53 @@
 </template>
 
 <script>
-import ListService from "../ListService";
+// import ListService from "../ListService";
 import UserService from "../UserService";
 
 export default {
   name: "ListComponent",
   data() {
     return {
-      lists: [],
+      lists: [
+        {
+          id: Number,
+        },
+      ],
       show: false,
-      notShow: true
+      notShow: true,
+      id: this.$route.params.id,
     };
   },
   async created() {
     try {
       //console.log(this.lists);
       //this.lists = await ListService.getLists();
-      UserService.getOneUser(localStorage.getItem('id')).then((user) => {
-        this.lists = user.data.lists;   
+      UserService.getOneUser(localStorage.getItem("id")).then((user) => {
+        this.lists = user.data.lists;
       });
     } catch (err) {
       console.error(err);
     }
   },
   methods: {
-    async deleteList(id) {
-      await ListService.deletelist(id);
-      this.lists = await ListService.getLists();
-    }
-  }
+    deleteList() {
+      try {
+        UserService.getOneUser(localStorage.getItem("id")).then((user) => {
+          let obj_id = user.data.lists._id;
+          let invalidElements = 0;
+            console.log(invalidElements);
+          if (obj_id !== undefined) {
+            return true;
+          } else {
+             invalidElements = invalidElements++;
+            return false;
+          }
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
 };
 </script>
 
